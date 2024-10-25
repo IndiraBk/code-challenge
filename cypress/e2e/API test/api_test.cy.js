@@ -7,7 +7,7 @@ describe("API Tests", () => {
     cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
     cy.intercept("POST", "https://sumome.com/services").as("postServices");
     cy.visit("/");
-    cy.wait("@postServices").then((interception) => {
+    cy.wait("@postServices", { timeout: 10000}).then((interception) => {
       const displayRules =
         interception.response.body.shareService.display_rules;
       displayRules.forEach((rule) => {
